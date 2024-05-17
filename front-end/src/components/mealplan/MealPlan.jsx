@@ -30,11 +30,14 @@ const MealPlan = ({ meal, userName }) => {
   const [commentOpen, setCommentOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [form] = Form.useForm();
+
   const [openDialog, setOpenDialog] = useState(false);
   const [mealPlanName, setMealPlanName] = useState("");
-  const [mealTime, setMealTime] = useState("");
-  const [mealDescription, setMealDescription] = useState("");
-  const [mealIngredients, setMealIngredients] = useState("");
+  const [description, setDescription] = useState("");
+  const [recipe, setRecipe] = useState("");
+  const [portionPerTime, setPortionPerTime] = useState("");
+  const [mealSchedule, setMealSchedule] = useState("");
+  const [nutrientBenefits, setNutrientBenefits] = useState("");
 
   const handleOpenDialog = () => {
     setOpenDialog(true);
@@ -47,9 +50,11 @@ const MealPlan = ({ meal, userName }) => {
   const handleCancel = () => {
     // Reset the form and close the dialog
     setMealPlanName("");
-    setMealTime("");
-    setMealDescription("");
-    setMealIngredients("");
+    setDescription("");
+    setRecipe("");
+    setPortionPerTime("");
+    setMealSchedule("");
+    setNutrientBenefits("");
     handleCloseDialog();
   };
 
@@ -58,9 +63,11 @@ const MealPlan = ({ meal, userName }) => {
     // You might want to call an API to save the changes in a real application
     console.log({
       mealPlanName,
-      mealTime,
-      mealDescription,
-      mealIngredients,
+      description,
+      recipe,
+      portionPerTime,
+      mealSchedule,
+      nutrientBenefits,
     });
     handleCloseDialog();
   };
@@ -430,30 +437,48 @@ const MealPlan = ({ meal, userName }) => {
           />
           <TextField
             margin="dense"
-            label="Meal Time"
+            label="Description"
             type="text"
             fullWidth
             variant="standard"
-            value={mealTime}
-            onChange={(e) => setMealTime(e.target.value)}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
           />
           <TextField
             margin="dense"
-            label="Meal Description"
+            label="Recipe"
             type="text"
             fullWidth
             variant="standard"
-            value={mealDescription}
-            onChange={(e) => setMealDescription(e.target.value)}
+            value={recipe}
+            onChange={(e) => setRecipe(e.target.value)}
+          />
+          {/* <TextField
+            margin="dense"
+            label="Portion Per Time"
+            type="text"
+            fullWidth
+            variant="standard"
+            value={portionPerTime}
+            onChange={(e) => setPortionPerTime(e.target.value)}
+          /> */}
+          <TextField
+            margin="dense"
+            label="Meal Schedule"
+            type="text"
+            fullWidth
+            variant="standard"
+            value={mealSchedule}
+            onChange={(e) => setMealSchedule(e.target.value)}
           />
           <TextField
             margin="dense"
-            label="Meal Ingredients"
+            label="Nutrient Benefits"
             type="text"
             fullWidth
             variant="standard"
-            value={mealIngredients}
-            onChange={(e) => setMealIngredients(e.target.value)}
+            value={nutrientBenefits}
+            onChange={(e) => setNutrientBenefits(e.target.value)}
           />
         </DialogContent>
         <DialogActions>
