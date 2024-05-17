@@ -2,12 +2,12 @@ import React, { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Navbar from "../../components/navbar/Navbar";
 import LeftBar from "../../components/leftBar/LeftBar";
-import RightBar from "../../components/rightBar/RightBar"
-import ShareWorkouts from "../../components/shareWorkout/ShareWorkout"
-import Workouts from "../../components/workouts/Workouts"
+import RightBar from "../../components/rightBar/RightBar";
+import ShareWorkouts from "../../components/shareWorkout/ShareWorkout";
+import Workouts from "../../components/workouts/Workouts";
 import { DarkModeContext } from "../../context/darkModeContext";
 import axios from "axios";
-import "./WorkoutsPage.scss"
+import "./WorkoutsPage.scss";
 
 function WorkoutsPage() {
   const { userName } = useParams();
@@ -41,7 +41,7 @@ function WorkoutsPage() {
               <Workouts userName={userName} />
             </div>
           </div>
-          <RightBar userName={userName} profilePic={profilePic}/>
+          <RightBar userName={userName} profilePic={profilePic} />
         </div>
       </div>
     );

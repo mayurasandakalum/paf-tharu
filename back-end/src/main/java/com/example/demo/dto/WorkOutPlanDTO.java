@@ -12,6 +12,7 @@ import java.util.List;
 public class WorkOutPlanDTO {
     private int id;
     private String userName;
+    private String userProfilePicture;
     private String workOutName;
     private String description;
     private List<ExerciseDTO> exerciseList;

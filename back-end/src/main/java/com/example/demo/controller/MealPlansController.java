@@ -32,19 +32,18 @@ public class MealPlansController {
 
     @PostMapping("/shareMealPlan")
     public ResponseEntity<String> setPost(@RequestParam("userName") String userName,
-                                          @RequestParam("post") MultipartFile image,
-                                          @RequestParam("mealName") String mealName,
-                                          @RequestParam("description") String description,
-                                          @RequestParam("recipe") String recipe,
-                                          @RequestParam("portion") String portion,
-                                          @RequestParam("mealSchedule") String mealSchedule,
-                                          @RequestParam("nutrition") String nutrition,
-                                          @RequestParam("vegetarian") boolean vegetarian,
-                                          @RequestParam("vegan") boolean vegan,
-                                          @RequestParam("glutenFree") boolean glutenFree,
-                                          @RequestParam("dairyFree") boolean dairyFree,
-                                          @RequestParam("nutFree") boolean nutFree
-                                          ){
+            @RequestParam("post") MultipartFile image,
+            @RequestParam("mealName") String mealName,
+            @RequestParam("description") String description,
+            @RequestParam("recipe") String recipe,
+            @RequestParam("portion") String portion,
+            @RequestParam("mealSchedule") String mealSchedule,
+            @RequestParam("nutrition") String nutrition,
+            @RequestParam("vegetarian") boolean vegetarian,
+            @RequestParam("vegan") boolean vegan,
+            @RequestParam("glutenFree") boolean glutenFree,
+            @RequestParam("dairyFree") boolean dairyFree,
+            @RequestParam("nutFree") boolean nutFree) {
         try {
             byte[] bytes = image.getBytes();
             Blob blobImage = new javax.sql.rowset.serial.SerialBlob(bytes);
@@ -75,35 +74,35 @@ public class MealPlansController {
 
     @PatchMapping("descriptionUpdateMeal/{id}/{description}")
     public ResponseEntity<String> updateDescription(@PathVariable("id") int id,
-                                                    @PathVariable("description") String newDescription) {
+            @PathVariable("description") String newDescription) {
         mealPlanningService.updateDescription(id, newDescription);
         return ResponseEntity.ok("Successfully updated description");
     }
 
     @PatchMapping("name/{id}/{name}")
     public ResponseEntity<String> updateMealName(@PathVariable("id") int id,
-                                                    @PathVariable("name") String newName) {
+            @PathVariable("name") String newName) {
         mealPlanningService.updateMealName(id, newName);
         return ResponseEntity.ok("Successfully updated video");
     }
 
     @PatchMapping("recipe/{id}/{recipe}")
     public ResponseEntity<String> updateRecipe(@PathVariable("id") int id,
-                                                    @PathVariable("recipe") String newRecipe) {
+            @PathVariable("recipe") String newRecipe) {
         mealPlanningService.updateRecipe(id, newRecipe);
         return ResponseEntity.ok("Successfully updated video");
     }
 
     @PatchMapping("schedule/{id}/{schedule}")
     public ResponseEntity<String> updateSchedule(@PathVariable("id") int id,
-                                               @PathVariable("schedule") String schedule) {
+            @PathVariable("schedule") String schedule) {
         mealPlanningService.updateSchedule(id, schedule);
         return ResponseEntity.ok("Successfully updated video");
     }
 
     @PatchMapping("nutrition/{id}/{nutrition}")
     public ResponseEntity<String> updateNutrition(@PathVariable("id") int id,
-                                                 @PathVariable("nutrition") String nutrition) {
+            @PathVariable("nutrition") String nutrition) {
         mealPlanningService.updateNutritionalBenefits(id, nutrition);
         return ResponseEntity.ok("Successfully updated video");
     }

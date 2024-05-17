@@ -10,7 +10,7 @@ const MealPlans = ({ userName }) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`http://localhost:8080/allMealPlanes`);
-        console.log('Fetched data:', response.data);
+        console.log('Fetched all meal plans data:', response.data);
 
         setMealPlans(response.data);
         console.log('Called setMealPlans with data:', response.data);

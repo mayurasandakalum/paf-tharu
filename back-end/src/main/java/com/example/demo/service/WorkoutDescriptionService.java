@@ -3,7 +3,6 @@ package com.example.demo.service;
 import com.example.demo.dto.ExerciseDTO;
 import com.example.demo.dto.WorkOutPlanDTO;
 import com.example.demo.entity.ExerciseEntity;
-import com.example.demo.entity.PostEntity;
 import com.example.demo.entity.WorkoutDescriptionEntity;
 import com.example.demo.repository.WorkOutDescriptionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +23,12 @@ public class WorkoutDescriptionService {
     @Autowired
     private ExerciseService exerciseService;
 
+    @Autowired
+    private UserService userService; // Add UserService
+
     public List<WorkoutDescriptionEntity> getAllWorkoutDescriptions() {
-        // Use the repository's findAll() method to fetch all WorkoutDescriptionEntity entities
+        // Use the repository's findAll() method to fetch all WorkoutDescriptionEntity
+        // entities
         return workOutDescriptionRepository.findAll();
     }
 
@@ -36,6 +39,11 @@ public class WorkoutDescriptionService {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    // Add method to get user profile picture
+    private String getUserProfilePicture(String userName) {
+        return userService.getProfilePhoto(userName);
     }
 
     public List<WorkOutPlanDTO> allWorkouts() {
@@ -51,6 +59,11 @@ public class WorkoutDescriptionService {
             workOutPlanDTO.setWorkOutName(name);
             workOutPlanDTO.setUserName(workoutDescriptionEntity.getUserName());
             workOutPlanDTO.setId(workoutDescriptionEntity.getId());
+
+            // Get user profile picture
+            String userProfilePicture = getUserProfilePicture(workoutDescriptionEntity.getUserName());
+            workOutPlanDTO.setUserProfilePicture(userProfilePicture);
+
             List<ExerciseEntity> exerciseEntities = exerciseService.getExercisesByWorkoutPlan(name);
             int number_of_exercises = exerciseEntities.size();
             List<ExerciseDTO> exerciseDTOList = new ArrayList<>(number_of_exercises);

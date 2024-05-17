@@ -18,8 +18,7 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/exercises")
-public class WorkoutPlansController
-{
+public class WorkoutPlansController {
 
     @Autowired
     private ExerciseService exerciseService;
@@ -60,16 +59,16 @@ public class WorkoutPlansController
 
     @PostMapping("/saveDescription")
     public ResponseEntity<String> saveDescription(@RequestParam("workoutPlan") String workoutPlan,
-                                                  @RequestParam("description") String description,
-                                                  @RequestParam("userName") String userName) {
+            @RequestParam("description") String description,
+            @RequestParam("userName") String userName) {
         WorkoutDescriptionEntity workoutDescriptionEntity = new WorkoutDescriptionEntity();
         workoutDescriptionEntity.setWorkoutPlan(workoutPlan);
         workoutDescriptionEntity.setDescription(description);
         workoutDescriptionEntity.setUserName(userName);
-        try{
+        try {
             workoutDescriptionService.saveDescription(workoutDescriptionEntity);
             return ResponseEntity.status(HttpStatus.CREATED).body("saved successfully.");
-        }catch (Exception e) {
+        } catch (Exception e) {
             // Handle potential exceptions and return an appropriate error response
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Failed to save : " + e.getMessage());
@@ -91,7 +90,7 @@ public class WorkoutPlansController
 
     @PatchMapping("descriptionUpdate/{id}/{description}")
     public ResponseEntity<String> updateDescription(@PathVariable("id") int id,
-                                                    @PathVariable("description") String newDescription) {
+            @PathVariable("description") String newDescription) {
         workoutDescriptionService.updateDescription(id, newDescription);
         return ResponseEntity.ok("Successfully updated video");
     }

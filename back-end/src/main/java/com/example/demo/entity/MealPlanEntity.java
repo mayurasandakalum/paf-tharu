@@ -23,7 +23,9 @@ public class MealPlanEntity {
     private String description;
     private String recipe;
     private String nutrition;
+    @Column(name = "`portion`")
     private String portion;
+
     private String schedule;
     // Dietary preferences
     private boolean vegetarian;
