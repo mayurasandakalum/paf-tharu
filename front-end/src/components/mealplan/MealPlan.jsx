@@ -45,6 +45,11 @@ const MealPlan = ({ meal, userName }) => {
 
   const handleCloseDialog = () => {
     setOpenDialog(false);
+    setMealPlanName("");
+    setDescription("");
+    setRecipe("");
+    setMealSchedule("");
+    setNutrientBenefits("");
   };
 
   const handleCancel = () => {
@@ -58,18 +63,38 @@ const MealPlan = ({ meal, userName }) => {
     handleCloseDialog();
   };
 
-  const handleSave = () => {
-    // Save the changes here, then close the dialog
-    // You might want to call an API to save the changes in a real application
-    console.log({
-      mealPlanName,
-      description,
-      recipe,
-      portionPerTime,
-      mealSchedule,
-      nutrientBenefits,
-    });
-    handleCloseDialog();
+  const handleClickUpdate = () => {
+    setMealPlanName(meal.mealName);
+    setDescription(meal.description);
+    setRecipe(meal.recipe);
+    setMealSchedule(meal.schedule);
+    setNutrientBenefits(meal.nutrition);
+
+    handleOpenDialog();
+  };
+
+  const handleSave = async () => {
+    try {
+      // Save the changes here, then close the dialog
+      // You might want to call an API to save the changes in a real application
+      await updateName(meal.id, mealPlanName);
+      await updateDescription(meal.id, description);
+      await updateRecipe(meal.id, recipe);
+      await updateSchedule(meal.id, mealSchedule);
+      await updateNutrition(meal.id, nutrientBenefits);
+      console.log({
+        mealPlanName,
+        description,
+        recipe,
+        portionPerTime,
+        mealSchedule,
+        nutrientBenefits,
+      });
+      handleCloseDialog();
+      window.location.reload();
+    } catch (error) {
+      console.error("Error updating meal plan:", error);
+    }
   };
 
   const deletePost = async (id) => {
@@ -233,7 +258,7 @@ const MealPlan = ({ meal, userName }) => {
                   <button onClick={handleUpdateSchedule}>
                     Update Schedule
                   </button> */}
-                  <button onClick={handleOpenDialog}>Update MealPlan</button>
+                  <button onClick={handleClickUpdate}>Update MealPlan</button>
                 </div>
               )}
             </div>
@@ -453,15 +478,6 @@ const MealPlan = ({ meal, userName }) => {
             value={recipe}
             onChange={(e) => setRecipe(e.target.value)}
           />
-          {/* <TextField
-            margin="dense"
-            label="Portion Per Time"
-            type="text"
-            fullWidth
-            variant="standard"
-            value={portionPerTime}
-            onChange={(e) => setPortionPerTime(e.target.value)}
-          /> */}
           <TextField
             margin="dense"
             label="Meal Schedule"
